@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8">
+  <title>Pozzo dei Desideri / The Wishing Well</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      text-align: center;
+      padding-top: 100px;
+      background-color: #f9f9f9;
+    }
+    h1 {
+      font-size: 2em;
+      color: #444;
+    }
+    form {
+      margin-top: 30px;
+    }
+    input[type="email"] {
+      padding: 10px;
+      font-size: 1em;
+      width: 250px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+    }
+    button {
+      padding: 10px 20px;
+      font-size: 1em;
+      margin-left: 10px;
+      background-color: #4CAF50;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+    button:hover {
+      background-color: #45a049;
+    }
+
+    .messaggio {
+      margin-top: 40px;
+      font-size: 1.2em;
+      font-weight: bold;
+      opacity: 0;
+      transition: opacity 0.6s ease-in-out;
+      position: relative;
+      color: #2e7d32;
+    }
+
+    .star {
+      position: absolute;
+      top: -25px;
+      left: 50%;
+      transform: translateX(-50%) scale(0.3);
+      opacity: 0;
+      font-size: 1.8em;
+      color: gold;
+      text-shadow: 0 0 8px gold, 0 0 15px #ffdf70;
+      transition: opacity 0.5s ease-out, transform 0.5s cubic-bezier(.17,.67,.55,1.43);
+    }
+
+    .show { opacity: 1 !important; }
+    .pop { transform: translateX(-50%) scale(1.3); }
+    .hide { opacity: 0; transform: translateX(-50%) scale(0.2); }
+
+    .sezione { display: none; }
+  </style>
+</head>
+<body>
+
+<!-- ITALIANO -->
+<div class="sezione" id="sezione-it">
+  <h1>✨ Pozzo dei Desideri ✨</h1>
+
+  <form method="POST"
+        action="https://script.google.com/macros/s/AKfycbw126YUNifMB95tjpfqAgzZrdI40-Ox6KswjyrGvjJkzYYRrnaqHk5mKJnCQG7kXYoW_A/exec"
+        target="hidden_iframe"
+        onsubmit="mostraMessaggio('msg-it')">
+
+    <input type="email" name="email" placeholder="Inserisci la tua email" required>
+    <button type="submit">Iscriviti</button>
+  </form>
+
+  <div class="messaggio" id="msg-it">
+    <span class="star">✨</span> Grazie per esserti iscritto a PozzoDeiDesideri!
+  </div>
+</div>
+
+<!-- ENGLISH -->
+<div class="sezione" id="sezione-en">
+  <h1>✨ The Wishing Well ✨</h1>
+
+  <form method="POST"
+        action="https://script.google.com/macros/s/AKfycbw126YUNifMB95tjpfqAgzZrdI40-Ox6KswjyrGvjJkzYYRrnaqHk5mKJnCQG7kXYoW_A/exec"
+        target="hidden_iframe"
+        onsubmit="mostraMessaggio('msg-en')">
+
+    <input type="email" name="email" placeholder="Enter your email" required>
+    <button type="submit">Subscribe</button>
+  </form>
+
+  <div class="messaggio" id="msg-en">
+    <span class="star">✨</span> Thank you for subscribing to PozzoDeiDesideri!
+  </div>
+</div>
+
+<iframe name="hidden_iframe" style="display:none;"></iframe>
+
+<script>
+  // Mostra la sezione in base alla lingua del browser
+  const lang = navigator.language || navigator.userLanguage;
+  if (lang && lang.toLowerCase().startsWith("it")) {
+    document.getElementById("sezione-it").style.display = "block";
+  } else {
+    document.getElementById("sezione-en").style.display = "block";
+  }
+
+  // Animazione stellina
+  function mostraMessaggio(id) {
+    const msg = document.getElementById(id);
+    const star = msg.querySelector(".star");
+
+    setTimeout(() => msg.classList.add("show"), 50);
+    setTimeout(() => star.classList.add("show"), 150);
+    setTimeout(() => star.classList.add("pop"), 350);
+    setTimeout(() => star.classList.add("hide"), 1200);
+  }
+</script>
+
+</body>
+</html>
